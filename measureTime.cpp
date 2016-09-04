@@ -1,5 +1,8 @@
 #include <sys/time.h>
 #include <iostream>
+using namespace std;
+
+timespec diff(timespec start, timespec end);
 
 int main() {
    timespec startTime, endTime;
@@ -9,8 +12,8 @@ int main() {
    	temp +=temp;
    }   
    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
-   timespec diff = diff(startTime, endTime)
-   cout << diff.tv_sec << ":" << diff.tv_nsec <<endl;
+   timespec d = diff(startTime, endTime);
+   cout << d.tv_sec << ":" << d.tv_nsec <<endl;
    return 0;
 }
 
