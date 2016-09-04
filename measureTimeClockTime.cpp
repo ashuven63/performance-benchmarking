@@ -1,5 +1,9 @@
 #include <sys/time.h>
 #include <iostream>
+#include <math.h>
+#include <unistd.h>
+#include <thread>         // std::this_thread::sleep_for
+#include <chrono> 
 using namespace std;
 
 timespec diff(timespec start, timespec end);
@@ -7,13 +11,15 @@ timespec diff(timespec start, timespec end);
 int main() {
    timespec startTime, endTime;
    int temp;
-   clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &startTime);
-   for(int i = 0; i < 242000000; i++) {
-   	temp +=temp;
-   }   
-   clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
+   clock_gettime(CLOCK_MONOTONIC, &startTime);
+   //int a = 1;
+   //clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &startTime);
+   usleep(10 * 1000000);	
+   clock_gettime(CLOCK_MONOTONIC, &startTime);
+   //clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
    timespec d = diff(startTime, endTime);
    cout << d.tv_sec << ":" << d.tv_nsec <<endl;
+   cout << "\nTime: " << (d.tv_nsec/pow(10,9)) << endl;
    return 0;
 }
 
