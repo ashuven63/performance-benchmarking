@@ -17,8 +17,8 @@ int main() {
    usleep(10 * 1000000);   
    clock_gettime(CLOCK_REALTIME, &endTime);
    //clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
-   timespec d = diff(startTime, endTime);
-   cout << d.tv_sec << ":" << d.tv_nsec <<endl;
+   //timespec d = diff(startTime, endTime);
+   cout << diff(startTime, endTime).tv_sec << ":" << diff(startTime, endTime).tv_nsec <<endl;
    cout << "\nTime: " << (d.tv_nsec/pow(10,9)) << endl;
    return 0;
 }
