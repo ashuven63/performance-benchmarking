@@ -19,7 +19,7 @@ int main() {
    //clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
    //timespec d = diff(startTime, endTime);
    cout << diff(startTime, endTime).tv_sec << ":" << diff(startTime, endTime).tv_nsec <<endl;
-   cout << "\nTime: " << (d.tv_nsec/pow(10,9)) << endl;
+   cout << "\nTime: " << (diff(startTime, endTime).tv_nsec/pow(10,9)) << endl;
    return 0;
 }
 
