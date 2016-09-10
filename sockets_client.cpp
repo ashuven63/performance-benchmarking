@@ -14,6 +14,7 @@
 #include <sys/stat.h>  
 #include <time.h>  
 #include <cassert>
+#include "timers.h"
 #define SERV_TCP_PORT 8010 /* server's port */
 using namespace std;
 
@@ -72,6 +73,8 @@ int main(int argc, char *argv[])
   int port = SERV_TCP_PORT;
   int buff_size = 0;
   int messageSize;
+  timespec startTime, endTime;
+  InitRdtsc();
   /* command line: client messageSize*/
   if(argc >= 2){
     messageSize = atoi(argv[1]);
@@ -110,10 +113,15 @@ int main(int argc, char *argv[])
   char* message = getString(messageSize);
   char* readMessage = new char[messageSize];
   /* write a message to the server */
+  //Start timer 
+  GetRdtscTime(&startTime);
   write_all(sockfd, message, messageSize);
   read_all(sockfd, readMessage, messageSize);
-  cout << "Received \n" << readMessage;
+  //End timer 
+  GetRdtscTime(&endTime);
+  cout << diff(startTime, endTime).tv_nsec / 2 << endl;readMessage;
 
+  delete[] readMessage;
   delete[] message;
   close(sockfd);
 }
