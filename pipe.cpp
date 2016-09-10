@@ -8,6 +8,7 @@
 #include <time.h>  
 #include <cassert>
 #include "timers.h"
+#include <stdlib.h>
 
 #define SERV_TCP_PORT 8000 /* server's port */
 
@@ -97,7 +98,7 @@ int main(int argc, char *argv[]){
         }
         //End timer
         GetRdtscTime(&endTime);
-        cout << "Time taken: " << diff(startTime, endTime).tv_nsec / 2 << endl;
+        cout << diff(startTime, endTime).tv_nsec / 2 << endl;
         //cout << "Reading the string in client: " << strlen(readMessage) << endl; 
         // Free the space allocated on the heap
         delete[] message;

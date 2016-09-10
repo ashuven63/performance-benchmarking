@@ -14,6 +14,7 @@
 #include <sys/stat.h>  
 #include <time.h>  
 #include <cassert>
+#include <stdlib.h>
 #include "timers.h"
 #define SERV_TCP_PORT 8010 /* server's port */
 using namespace std;
