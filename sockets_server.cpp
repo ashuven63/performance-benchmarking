@@ -11,7 +11,7 @@
 #include <sys/stat.h>  
 #include <time.h>  
 #include <cassert>
-
+#include <stdlib.h>
 
 #define SERV_TCP_PORT 8010 /* server's port number */
 #define MAX_SIZE 80
@@ -105,7 +105,8 @@ int main(int argc, char *argv[])
    len = read_all(newsockfd, readMessage, messageSize); 
    write_all(newsockfd, readMessage, messageSize);
    /* make sure it's a proper string */
-   printf("%s\n", readMessage);
+//   printf("%s\n", readMessage);
    close(newsockfd);
+   close(sockfd);
 }
 
