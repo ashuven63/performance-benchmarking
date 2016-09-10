@@ -1,4 +1,6 @@
 #include <sys/time.h>
+#include <math.h>
+#include <unistd.h>
 #include <iostream>
 #include "timers.h"
 using namespace std;
@@ -8,13 +10,14 @@ int main() {
    timespec startTime, endTime;
    int temp;
    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &startTime);
-   int a = 1;
+   for(int i = 0; i< 10; i++)
+	int a = 1;
+   //usleep(1000000);
    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
    timespec d = diff(startTime, endTime);
-   cout << d.tv_sec << ":" << d.tv_nsec <<endl;
+   cout << "\nTime: " << (diff(startTime, endTime).tv_nsec/pow(10,9)) << endl;
    return 0;
-}
-*/
+}*/
 timespec diff(timespec start, timespec end)
 {
 	timespec temp;
