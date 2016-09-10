@@ -14,7 +14,6 @@ int main() {
    clock_gettime(CLOCK_REALTIME, &startTime);
    //int a = 1;
    //clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &startTime);
-   usleep(10 * 1000000);   
    clock_gettime(CLOCK_REALTIME, &endTime);
    //clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &endTime);
    //timespec d = diff(startTime, endTime);

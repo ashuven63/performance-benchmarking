@@ -7,6 +7,11 @@
 #include <sys/types.h> 
 #include <time.h>  
 #include <cassert>
+#include <sys/time.h>
+#include <chrono> 
+
+#define SERV_TCP_PORT 8000 /* server's port */
+
 using namespace std;
 
 char* getString(int sLength){
@@ -75,8 +80,10 @@ int main(int argc, char *argv[]){
         close(server[1]); // Read using server[0]
         char* message = getString(messageSize);
         char* readMessage = new char[messageSize];
+        timespec startTime, endTime;
         // cout << message <<endl;
         // Start Timer 
+        clock_gettime(CLOCK_REALTIME, &startTime);
         int writtenBytes = write_all(client[1], message, messageSize);
         if(writtenBytes != messageSize) {
             cout <<  "Error in writing: Wrote " << writtenBytes << endl;
@@ -87,11 +94,14 @@ int main(int argc, char *argv[]){
             cout <<  "Error in reading: Read " << readBytes << endl;
             return 0;
         }
-        cout << "Reading the string in client: " << strlen(readMessage) << endl; 
+        //End timer
+        clock_gettime(CLOCK_REALTIME, &endTime);
+        cout << "Time taken: " << diff(startTime, endTime).tv_nsec / 2 << endl;
+        //cout << "Reading the string in client: " << strlen(readMessage) << endl; 
         // Free the space allocated on the heap
         delete[] message;
         delete[] readMessage;
-        // End Timer 
+         
 
     } else { // Child process which will behave as the server
         close(client[1]); // Read using client[0]
@@ -102,7 +112,7 @@ int main(int argc, char *argv[]){
             cout <<  "Error in reading: Read " << readBytes << endl;
             return 0;
         }
-        cout << "Read the string in server : " << strlen(readMessage) << endl;
+        // cout << "Read the string in server : " << strlen(readMessage) << endl;
         int writtenBytes = write_all(server[1], readMessage, messageSize);
         if(writtenBytes != messageSize) {
             cout <<  "Error in writing: Wrote " << writtenBytes << endl;
