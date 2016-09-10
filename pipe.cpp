@@ -72,6 +72,8 @@ int main(int argc, char *argv[]){
     pipe(client);
 
     pid = fork();
+    InitRdtsc();
+    
 
     // The parent which will behave as the client 
     if(pid == 0) {
@@ -82,7 +84,7 @@ int main(int argc, char *argv[]){
         timespec startTime, endTime;
         // cout << message <<endl;
         // Start Timer 
-        clock_gettime(CLOCK_REALTIME, &startTime);
+        GetRdtscTime(&startTime);
         int writtenBytes = write_all(client[1], message, messageSize);
         if(writtenBytes != messageSize) {
             cout <<  "Error in writing: Wrote " << writtenBytes << endl;
@@ -94,7 +96,7 @@ int main(int argc, char *argv[]){
             return 0;
         }
         //End timer
-        clock_gettime(CLOCK_REALTIME, &endTime);
+        GetRdtscTime(&endTime);
         cout << "Time taken: " << diff(startTime, endTime).tv_nsec / 2 << endl;
         //cout << "Reading the string in client: " << strlen(readMessage) << endl; 
         // Free the space allocated on the heap
