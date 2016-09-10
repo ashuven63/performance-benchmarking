@@ -32,14 +32,14 @@ void cleanup_semaphores(){
     /**
      * Semaphore unlink: Remove a named semaphore  from the system.
      */
-    if ( sem_unlink("/writesem") < 0 )
-    {
-        perror("sem_unlink");
-    }
-    if ( sem_unlink("/readsem") < 0 )
-    {
-        perror("sem_unlink");
-    }
+    // if ( sem_unlink("/writesem") < 0 )
+    // {
+    //     perror("sem_unlink");
+    // }
+    // if ( sem_unlink("/readsem") < 0 )
+    // {
+    //     perror("sem_unlink");
+    // }
 }
 
 void signal_callback_handler(int signum)
