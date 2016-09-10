@@ -1,6 +1,6 @@
 #include <stdint.h> /* for uint64_t */
 #include <time.h>  /* for struct timespec */
- 
+#include <sched.h> 
 /* assembly code to read the TSC */
 static inline uint64_t RDTSC()
 {
@@ -43,9 +43,9 @@ static void CalibrateTicks()
 /* Call once before using RDTSC, has side effect of binding process to CPU1 */
 void InitRdtsc()
 {
-  unsigned long cpuMask;
-  cpuMask = 2; // bind to cpu 1
-  sched_setaffinity(0, sizeof(cpuMask), &cpuMask);
+  //unsigned long cpuMask;
+//  cpu_set_t cpuMask = 2; // bind to cpu 1
+//  sched_setaffinity(0, sizeof(cpuMask), &cpuMask);
   CalibrateTicks();
 }
  
