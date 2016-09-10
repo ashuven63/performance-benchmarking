@@ -9,4 +9,8 @@
 
 timespec diff(timespec start, timespec end);
 
+// Rdtsc calls
+void GetRdtscTime(struct timespec *ts);
+void InitRdtsc();
+
 #endif
