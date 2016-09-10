@@ -3,8 +3,7 @@
 #include "timers.h"
 using namespace std;
 
-timespec diff(timespec start, timespec end);
-
+/*
 int main() {
    timespec startTime, endTime;
    int temp;
@@ -15,7 +14,7 @@ int main() {
    cout << d.tv_sec << ":" << d.tv_nsec <<endl;
    return 0;
 }
-
+*/
 timespec diff(timespec start, timespec end)
 {
 	timespec temp;
