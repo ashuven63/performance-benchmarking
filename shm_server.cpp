@@ -8,6 +8,7 @@
 #include <signal.h>
 #include <semaphore.h>
 #include <iostream>
+#include "timers.h"
 using namespace std;
 
 #define SHMOBJ_PATH         "/shmperf"
@@ -60,7 +61,9 @@ int main(int argc, char *argv[]) {
     int shmfd;
     int vol, cur;
     int shared_seg_size = (messageSize * sizeof(char));   
-    char* shared_msg;      
+    char* shared_msg;   
+    timespec startTime, endTime;
+    InitRdtsc();   
 
     signal(SIGINT, signal_callback_handler);
 
@@ -96,10 +99,10 @@ int main(int argc, char *argv[]) {
 
     sem_wait(write_sem_id);
     sleep(5);
-    // TODO: Start Timer
+    GetRdtscTime(&startTime);
     for(int i = 0; i < messageSize; i++){
         shared_msg[i] = 'a';
-        cout << i+" ";
+        cout << i <<endl;
     }
     sem_post(write_sem_id);
 
@@ -110,9 +113,9 @@ int main(int argc, char *argv[]) {
     }
     sem_post(read_sem_id);
 
-    // TODO: End timer
-
-    cout << "Received " <<readMessage << endl;
+    // End timer
+    GetRdtscTime(&endTime);
+    cout << diff(startTime, endTime).tv_nsec / 2 << endl;
     if (shm_unlink(SHMOBJ_PATH) != 0) {
         perror("In shm_unlink()");
         exit(1);
