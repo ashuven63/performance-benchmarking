@@ -7,8 +7,7 @@
 #include <sys/types.h> 
 #include <time.h>  
 #include <cassert>
-#include <sys/time.h>
-#include <chrono> 
+#include "timers.h"
 
 #define SERV_TCP_PORT 8000 /* server's port */
 

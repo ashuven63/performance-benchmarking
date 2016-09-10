@@ -1,12 +1,8 @@
-#include <sys/time.h>
-#include <iostream>
-#include <math.h>
-#include <unistd.h>
-#include <thread>         // std::this_thread::sleep_for
-#include <chrono> 
+#include "timers.h"
+
 using namespace std;
 
-timespec diff(timespec start, timespec end);
+
 
 int main() {
    timespec startTime, endTime;
