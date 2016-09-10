@@ -1,5 +1,6 @@
 #include <sys/time.h>
 #include <iostream>
+#include "timers.h"
 using namespace std;
 
 timespec diff(timespec start, timespec end);
